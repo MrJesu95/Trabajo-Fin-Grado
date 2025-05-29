@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Script to compile the client, server, and app components
+
+# Get the absolute directory where this script is located
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+PROJECT_ROOT=$(dirname "$SCRIPT_DIR")
+
+# Activate Python virtual environment
+VENV_PATH="$PROJECT_ROOT/.venv/bin/activate"
+#VENV_PATH="/home/pi/Documentos/TFG 1504/TFG-New-features/.venv/bin/activate"
+if [ -f "$VENV_PATH" ]; then
+    source "$VENV_PATH"
+else
+    echo "Error: Virtual environment not found at $VENV_PATH"
+    exit 1
+fi
+
+# Compile client
+CLIENT_SRC="$PROJECT_ROOT/python/client"
+CLIENT_DEST="$PROJECT_ROOT/bin/client"
+(
+    cd "$CLIENT_SRC" || exit 1
+    rm -rf build/ dist/
+    rm -f *.spec
+    pyinstaller --onefile started_ClientSIO.py
+    cp -f dist/started_ClientSIO "$CLIENT_DEST/"
+    rm -rf build/ dist/
+    rm -f *.spec
+    echo "###################### Client Compiled ######################"
+)
+
+# Compile server
+SERVER_SRC="$PROJECT_ROOT/python/server"
+SERVER_DEST="$PROJECT_ROOT/bin/server"
+(
+    cd "$SERVER_SRC" || exit 1
+    rm -rf build/ dist/
+    rm -f *.spec
+    pyinstaller --onefile serverSIO.py
+    cp -f dist/serverSIO "$SERVER_DEST/"
+    rm -rf build/ dist/
+    rm -f *.spec
+    echo "###################### Server Compiled ######################"
+)
+
+# Compile app
+(
+    cd "$PROJECT_ROOT" || exit 1
+    npm run dist:linux
+    echo "###################### App Compiled ######################"
+)

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=tfg
+Exec=/home/pi/Documentos/TFG/Help-files/start onboot
+Icon=/home/pi/Documentos/TFG/src/assets/icon.png
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+Hidden=false
+NoDisplay=false

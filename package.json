@@ -1,0 +1,76 @@
+{
+  "name": "tfg",
+  "version": "1.0.0",
+  "description": "TFG",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:linux": "electron-builder --linux",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.tfg",
+    "productName": "TFG",
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/icon.ico"
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "icon": "src/assets/icon.png"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/",
+      "!.venv/**",
+      "!python/**",
+      "!Help-files/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "bin",
+        "to": "bin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
+  "author": "Jesus Quirante <jesus.quirante.dominguez@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "electron": "^35.3.0",
+    "electron-builder": "^26.0.12",
+    "electron-installer-debian": "^3.2.0",
+    "electron-packager": "^17.1.2",
+    "mocha": "^11.1.0",
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrJesu95/TFG.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/MrJesu95/TFG/issues"
+  },
+  "homepage": "https://github.com/MrJesu95/TFG#readme",
+  "dependencies": {
+    "socket.io-client": "^4.8.1"
+  }
+}

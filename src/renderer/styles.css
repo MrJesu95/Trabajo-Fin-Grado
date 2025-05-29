@@ -1,0 +1,449 @@
+* {
+    user-select: none; /* Deshabilita la selección de texto */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.shutdown-btn-container {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.shutdown-btn {
+    padding: 10px 20px;
+    font-size: 2.5rem;
+    background-color: #f44336; /* Rojo */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.shutdown-btn:hover {
+    background-color: #d32f2f; /* Rojo más oscuro al hover */
+}
+
+/* Estilos para el modal de apagado */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Mayor que todo lo demás */
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content p {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.modal-btn {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirm-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #d32f2f;
+}
+
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #bdbdbd;
+}
+
+.session-header {
+    position: absolute; /* Lo saca del flujo normal */
+    top: 50px; /* Ajusta según tu padding del body */
+    left: 50px; /* Ajusta según tu padding del body */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea a la derecha */
+    padding: 10px;
+    gap: 0;
+    z-index: 10; /* Asegura que esté por encima */
+    width: auto;
+    text-align: center;
+    border: 2px solid #666666;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.session-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.4rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 0; /* Elimina margen inferior */
+    line-height: 1; /* Reduce el espacio de línea */
+    width: 100%;
+}
+
+#nSession {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    background-color: #4CAF50;
+    border: 2px solid #3e8e41;
+    border-radius: 8px;
+    padding: 5px 20px; /* Reducido padding vertical */
+    text-align: center;
+    width: fit-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+    animation: refresh 2s infinite ease-in-out;
+    margin-top: 20px; /* Mínimo espacio superior */
+    line-height: 1.2; /* Ajuste fino de altura de línea */
+    margin-left: auto;
+    margin-right: auto; /* Centrado horizontal */
+}
+
+
+.nserie-header {
+    position: absolute; /* Lo saca del flujo normal */
+    bottom: 50px; /* Ajusta según tu padding del body */
+    left: 50px; /* Ajusta según tu padding del body */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea a la derecha */
+    padding: 10px;
+    gap: 0;
+    z-index: 10; /* Asegura que esté por encima */
+    width: auto;
+    text-align: center;
+    border: 2px solid #666666;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.nserie-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 0; /* Elimina margen inferior */
+    line-height: 1; /* Reduce el espacio de línea */
+    width: 100%;
+}
+
+#nserie {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 0;
+    line-height: 1;
+    width: 100%;
+}
+
+.param-header {
+    position: absolute; /* Lo saca del flujo normal */
+    bottom: 50px; /* Ajusta según tu padding del body */
+    right: 50px; /* Ajusta según tu padding del body */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea a la derecha */
+    padding: 10px;
+    gap: 0;
+    z-index: 10; /* Asegura que esté por encima */
+    width: auto;
+    text-align: center;
+    border: 2px solid #666666;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.param-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 0; /* Elimina margen inferior */
+    line-height: 1; /* Reduce el espacio de línea */
+    width: 100%;
+}
+
+#param {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    margin: 5px;
+    margin-bottom: 0;
+    line-height: 1;
+    width: 100%;
+}
+
+
+
+
+/* Animación para simular un efecto refrescante */
+@keyframes refresh {
+    0%, 100% {
+        transform: scale(1); /* Escala normal */
+    }
+    50% {
+        transform: scale(1.1); /* Ligeramente más grande */
+    }
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    border: 15px solid #0004ff;
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrado vertical principal */
+    align-items: center; /* Centrado horizontal */
+}
+
+/* Estados adicionales */
+.container.running {
+    border-color: #4CAF50; /* Verde: Estado activo */
+}
+
+.container.paused {
+    border-color: #FFA500; /* Naranja: Estado en pausa/reposo */
+}
+
+.container.error {
+    border-color: #FF0000; /* Rojo: Estado de error */
+}
+
+.container.init {
+    border-color: #0004ff; /* Rojo: Estado de error */
+}
+
+.container.sessionState {
+    border-color: #ca32e9; /* Azul: Estado de error */
+}
+
+#countdown {
+    font-size: 8rem;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    letter-spacing: 2px; /* Mejor legibilidad */
+    
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px; /* Espacio entre countdown y botones */
+    position: relative;
+    top: -10px; /* Ajuste fino si es necesario */
+}
+
+button {
+    width: 250px;       /* Ancho fijo */
+    height: 80px;
+    padding: 15px 30px; /* Aumentado de 10px 20px */
+    font-size: 2.5rem; /* Aumentado de 1rem */
+    border: none;
+    border-radius: 8px; /* Bordes más redondeados */
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+button.init {
+    background-color: #2196F3; /* Azul - Empezar */
+}
+
+button.pause {
+    background-color: #FF9800; /* Naranja - Pausar */
+}
+
+button.continue {
+    background-color: #4CAF50; /* Verde - Continuar */
+}
+
+button.hidden {
+    display: none;
+}
+/* button:hover {
+    opacity: 0.8;
+} */
+
+
+/* Estilos para el bloque de leyenda */
+.legend {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #666666;
+    border-radius: 15px;
+    padding: 15px;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.legend h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-color {
+    width: 25px;  /* Aumentado de 20px */
+    height: 25px; /* Aumentado de 20px */
+    border-radius: 4px;
+    margin-right: 10px;
+    border: 1px solid #333;
+}
+
+/* Colores específicos para cada ítem de leyenda */
+.legend-item:nth-child(2) .legend-color {
+    background-color: #0004ff !important;
+}
+
+.legend-item:nth-child(3) .legend-color {
+    background-color: #4CAF50 !important;
+}
+
+.legend-item:nth-child(4) .legend-color {
+    background-color: #FFA500 !important;
+}
+
+.legend-item:nth-child(5) .legend-color {
+    background-color: #FF0000 !important;
+}
+
+.legend-item:nth-child(6) .legend-color {
+    background-color: #ca32e9 !important;
+}
+
+.legend-text {
+    font-size: 1rem;
+    color: #333;
+    min-width: 120px; /* Asegura espacio para el texto */
+}
+
+
+/* Pantalla de carga */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.hidden {
+    visibility: hidden; /* Mantiene el espacio pero oculta el contenido */
+    pointer-events: none; /* Evita la interacción mientras está oculto */
+}
+
+.visible {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.loading-spinner {
+    border: 8px solid #f3f3f3; /* Borde claro */
+    border-top: 8px solid #4caf50; /* Borde verde */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Animación de carga */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

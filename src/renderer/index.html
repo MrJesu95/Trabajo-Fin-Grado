@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; connect-src ws://localhost:5000 http://localhost:5000; script-src 'self'; style-src 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TFG</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="../main/utils/clientSocketIO.js"></script>
+</head>
+
+<body>
+    <!-- Pantalla de carga -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <h1>Cargando...</h1>
+    </div>
+
+    <!-- Boton de apagado -->
+    <div class="shutdown-btn-container">
+        <button class="shutdown-btn" id="shutdown-btn">Apagar</button>
+    </div>
+    
+    <!-- Modal de confirmación de apagado -->
+    <div id="shutdown-modal" class="modal hidden">
+        <div class="modal-content">
+            <p>¿Deseas apagar el equipo?</p>
+            <div class="modal-buttons">
+                <button id="shutdown-confirm" class="modal-btn confirm-btn">Aceptar</button>
+                <button id="shutdown-cancel" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marco de sesiones -->
+    <div class="session-header">
+        <h1 class="session-label">Sesiones<br>Disponibles</h1>
+        <h1 id="nSession"></h1>
+    </div>
+
+    <!-- Marco de Numero de serie -->
+    <div class="nserie-header">
+        <h1 class="nserie-label">Número de serie</h1>
+        <h1 id="nserie"></h1>
+    </div>
+
+    <!-- Marco de parametros -->
+    <div class="param-header">
+        <h1 class="param-label">Parámetros<br>sesión</h1>
+        <h1 id="param"></h1>
+    </div>
+
+    <!-- Marco de leyendas -->
+    <div class="legend">
+        <h2>Estados</h2>
+        <div class="legend-item">
+            <div class="legend-color"></div>
+            <span class="legend-text">Estado inicial</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color"></div>
+            <span class="legend-text">En ejecución</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color"></div>
+            <span class="legend-text">En pausa</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color"></div>
+            <span class="legend-text">Error</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color"></div>
+            <span class="legend-text">Carga de sesiones</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container" id="status">
+        <h1 id="countdown"></h1>
+        <div class="buttons">
+            <button class="init" id="actionButton">Empezar</button>
+            <!-- <button id="stop">Parar</button> -->
+        </div>
+    </div>
+
+    <script type="module" src="../renderer/renderer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{
+    "serialNumber": "01052025",
+    "nSesiones": 50,
+    "timeSesion": 20,
+    "typeSignal": "Cuadrada",
+    "amplitude": "0-5 V",
+    "frequency": "0.1-200 Hz",
+    "offset": "0"
+}

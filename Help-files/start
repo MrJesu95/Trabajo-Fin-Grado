@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/pi/Documentos/TFG/dist/linux-arm64-unpacked
+./tfg
